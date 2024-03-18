@@ -111,7 +111,7 @@ export default function MainProfile({
                 <Text style={styles.dropdownLabel}>Biography</Text>
                 <TextInput multiline={true} style={styles.bioText} />
               </View>
-              <View>
+              <View style={styles.checkBox}>
                 <CheckBox
                   onPress={() => setBookmark(!bookmark)}
                   title="Hide bookmarks from public"
@@ -264,5 +264,8 @@ const styles = StyleSheet.create({
     paddingRight: 6,
     paddingVertical: 10,
     textAlignVertical: "top",
+  },
+  checkBox: {
+    marginBottom: 45,
   },
 });

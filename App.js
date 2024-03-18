@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import Profile from "./src/Screens/Profile";
-import ComicPage from "./src/Screens/ComicPage";
+import Subscribe from "./src/Screens/Subscribe";
 // import Navbar from "./src/Components/Navbar";
 
 export default function App() {
@@ -9,8 +9,8 @@ export default function App() {
     <View style={styles.container}>
       {/* <Navbar /> */}
       <View>
-        <Profile />
-        {/* <ComicPage /> */}
+        {/* <Profile /> */}
+        <Subscribe />
       </View>
       <StatusBar style="light" />
     </View>

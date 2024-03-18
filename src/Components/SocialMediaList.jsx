@@ -52,7 +52,7 @@ export default function SocialMediaList() {
 const styles = StyleSheet.create({
   socialMain: {
     marginBottom: 250,
-    marginTop: 45,
+    // marginTop: 45,
   },
   sectionTitle: {
     fontSize: 18,
