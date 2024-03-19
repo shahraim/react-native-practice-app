@@ -26,7 +26,7 @@ export default function Profile() {
 
   return (
     <>
-      {!isEditProfileVisible && <Navbar />}
+      {/* {!isEditProfileVisible && <Navbar />} */}
       {isEditProfileVisible && (
         <View style={styles.backContainer}>
           <TouchableOpacity onPress={handleBack}>
