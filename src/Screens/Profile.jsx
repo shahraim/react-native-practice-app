@@ -26,7 +26,7 @@ export default function Profile() {
 
   return (
     <>
-      {/* {!isEditProfileVisible && <Navbar />} */}
+      {!isEditProfileVisible && <Navbar />}
       {isEditProfileVisible && (
         <View style={styles.backContainer}>
           <TouchableOpacity onPress={handleBack}>
@@ -119,6 +119,7 @@ export default function Profile() {
 const styles = StyleSheet.create({
   backContainer: {
     height: 67.58,
+    backgroundColor: "#131313",
   },
   backBorder: {
     alignItems: "center",
@@ -136,6 +137,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#131313",
     height: "100%",
     color: "#F8F8F8",
+    marginTop: -1,
   },
   profileBar: {
     flexDirection: "row",

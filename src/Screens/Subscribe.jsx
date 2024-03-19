@@ -11,21 +11,24 @@ import { useFonts } from "expo-font";
 import Navbar from "../Components/Navbar";
 import SubscribeNowSec from "../Components/Subscribe/SubscribeNowSec";
 import { LinearGradient } from "expo-linear-gradient";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Subscribe() {
   const [loaded] = useFonts({
     AkiraExpandedDemo: require("../../assets/fonts/Akira Expanded Demo.otf"),
   });
-
+  const navigation = useNavigation();
   if (!loaded) {
     return null;
   }
+
   const imgs = [
     require("../../assets/Mask Group.png"),
     require("../../assets/Mask Group.png"),
     require("../../assets/Mask Group.png"),
     require("../../assets/Mask Group.png"),
   ];
+
   const benefits = [
     {
       icon: require("../../assets/22.png"),
@@ -37,14 +40,18 @@ export default function Subscribe() {
     },
     {
       icon: require("../../assets/22.png"),
-      text: "10% off on all one-time shard pruchases.",
+      text: "10% off on all one-time shard purchases.",
     },
     {
       icon: require("../../assets/22.png"),
       text: "No limits on Wait To Read.",
     },
   ];
+
   const totalWidth = imgs.length * (190 + 20);
+  const handleSubscribeNowPress = () => {
+    navigation.navigate("Purchase");
+  };
 
   return (
     <View style={styles.subscriptionComp}>
@@ -124,7 +131,7 @@ export default function Subscribe() {
               </Text>
             </View>
             <View style={styles.subscribeBtnArea}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={handleSubscribeNowPress}>
                 <LinearGradient
                   colors={[
                     "rgba(214, 26, 76, 0.95)",
@@ -150,6 +157,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     zIndex: 10,
+    backgroundColor: "#131313",
   },
   scrollContainer: {
     flexGrow: 1,
