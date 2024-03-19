@@ -11,9 +11,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "assets/fonts/**/*"
-    ],
+    "assetBundlePatterns": ["assets/fonts/**/*"],
     "ios": {
       "supportsTablet": true
     },
@@ -23,11 +21,11 @@
         "backgroundColor": "#ffffff"
       }
     },
+    "sdkVersion": "32.0.0",
+    "platforms": ["ios", "android"],
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": [
-      "expo-font"
-    ]
+    "plugins": ["expo-font"]
   }
 }

@@ -1,10 +1,17 @@
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Navbar from "../Components/Navbar";
+import { useFonts } from "expo-font";
 
 export default function Subscribe() {
+  const [loaded] = useFonts({
+    AkiraExpandedDemo: require("../../assets/fonts/Akira Expanded Demo.otf"),
+  });
+
+  if (!loaded) {
+    return null;
+  }
   const handleSubscribe = () => {
-    // Add logic to handle subscription
     console.log("Subscribed!");
   };
 
@@ -19,9 +26,18 @@ export default function Subscribe() {
         {/*  */}
         <View style={styles.exclusivePerk}>
           <View style={styles.getPerk}>
-            <Text style={styles.getPerkTitle}>Alandal +</Text>
-            <Text style={styles.getPerkText}>Get Exclusive Perks</Text>
+            <Text style={styles.getPerkTitle}>
+              Alandal <Text style={styles.pinkClr}>+</Text>
+            </Text>
+            <Text style={styles.getPerkText}>
+              Get
+              {"\n"}
+              <Text style={styles.pinkClr}>Exclusive</Text>
+              {"\n"}
+              Perks
+            </Text>
           </View>
+
           <Text style={styles.getPerkPara}>
             Escape Reality and dive into our ever-growing collection of
             exclusive comics and novels.
@@ -38,7 +54,9 @@ export default function Subscribe() {
           <Text style={styles.subscriptionPrice}>$9.99/ Monthly*</Text>
         </View>
         {/*  */}
-        <Text>Unlock the realms of imagination</Text>
+        <Text style={styles.unlockRealms}>
+          Unlock the realms of imagination
+        </Text>
       </View>
     </View>
   );
@@ -70,13 +88,14 @@ const styles = StyleSheet.create({
   },
   getPerk: {
     alignItems: "center",
+    gap: 16,
   },
   getPerkTitle: {
     fontSize: 16,
     lineHeight: 16,
     letterSpacing: 0.0,
-    // akira expanded font family
-    // weight super bold
+    fontFamily: "AkiraExpandedDemo",
+    color: "#FFFFFF",
   },
   getPerkText: {
     textAlign: "center",
@@ -84,29 +103,45 @@ const styles = StyleSheet.create({
     lineHeight: 38,
     letterSpacing: 0.8,
     width: 261,
-    // akira expanded font family
-    // weight super bold
+    fontFamily: "AkiraExpandedDemo",
+    color: "#FFFFFF",
   },
   getPerkPara: {
     textAlign: "center",
     fontSize: 13,
     lineHeight: 20.6,
+    color: "#F8F8F8",
   },
   subscribeBtnArea: {
     alignItems: "center",
+    gap: 12,
+    height: 86,
   },
   subscribeBtn: {
-    backgroundColor: "#D61A4C",
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 5,
-    marginBottom: 10,
+    backgroundColor: "rgba(214, 26, 76, 1)",
+    borderRadius: 100,
+    justifyContent: "center",
+    alignItems: "center",
   },
   subscribeBtnText: {
-    color: "#FFF",
-    fontSize: 18,
+    color: "#F8F8F8",
+    fontSize: 16,
+    lineHeight: 26,
+    letterSpacing: 0.5,
   },
   subscriptionPrice: {
-    fontSize: 16,
+    fontSize: 13,
+    lineHeight: 20.6,
+    color: "#F8F8F8",
+  },
+  pinkClr: {
+    color: "rgba(214, 27, 76, 1)",
+  },
+  unlockRealms: {
+    color: "#FFFFFF",
+    fontSize: 24,
+    lineHeight: 38,
+    letterSpacing: 0.8,
+    fontFamily: "AkiraExpandedDemo",
   },
 });
