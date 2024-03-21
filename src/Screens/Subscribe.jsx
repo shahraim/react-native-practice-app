@@ -11,13 +11,11 @@ import { useFonts } from "expo-font";
 import Navbar from "../Components/Navbar";
 import SubscribeNowSec from "../Components/Subscribe/SubscribeNowSec";
 import { LinearGradient } from "expo-linear-gradient";
-import { useNavigation } from "@react-navigation/native";
 
-export default function Subscribe() {
+export default function Subscribe({ navigation }) {
   const [loaded] = useFonts({
     AkiraExpandedDemo: require("../../assets/fonts/Akira Expanded Demo.otf"),
   });
-  const navigation = useNavigation();
   if (!loaded) {
     return null;
   }

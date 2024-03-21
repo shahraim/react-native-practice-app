@@ -1,7 +1,15 @@
-import React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import Navbar from "../Navbar";
 import { useFonts } from "expo-font";
+import BuyList from "./PurchaseSec/BuyList";
 
 export default function Purchase() {
   const [loaded] = useFonts({
@@ -12,33 +20,92 @@ export default function Purchase() {
     return null;
   }
 
+  const [selectedFaqIndex, setSelectedFaqIndex] = useState(0);
+
+  const faqData = [
+    {
+      question: "What is Shards?",
+      answer:
+        "Shards are our virtual platform currency which can be used to unlock new chapters immediately without waiting.",
+    },
+    {
+      question: "How long does it take to receive shards after purchase?",
+      answer:
+        "Shards are typically delivered instantly after purchase, but in some cases, it may take a few minutes to process.",
+    },
+    {
+      question: "Are there any restrictions  on using shards?",
+      answer:
+        "Shards are typically delivered instantly after purchase, but in some cases, it may take a few minutes to process.",
+    },
+    {
+      question: "What  is comics or novels should I read first?",
+      answer:
+        "Shards are typically delivered instantly after purchase, but in some cases, it may take a few minutes to process.",
+    },
+  ];
+
+  const toggleFaqItem = (index) => {
+    setSelectedFaqIndex(index);
+  };
+
   return (
     <View style={styles.purchase}>
       <Navbar />
-      <View style={styles.purchaseSec}>
-        <Image
-          style={styles.gemStoneBack}
-          source={require("../../../assets/gemstones3.png")}
-        />
-        <View style={styles.getPerk}>
-          <Text style={styles.getPerkText}>
-            escape
-            {"\n"}
-            <Text style={styles.pinkClr}>reality</Text>
-          </Text>
-          <Text style={styles.purchasePara}>
-            Unlock Action-Packed Chapters!
-          </Text>
-        </View>
-        <View style={styles.buyArea}>
-          <Text style={styles.purchaseSherds}>Purchase Shards</Text>
+      <ScrollView>
+        <View style={styles.purchaseSec}>
           <Image
-            style={[styles.gemStoneSmall, styles.flipHorizontal]}
+            style={styles.gemStoneBack}
             source={require("../../../assets/gemstones3.png")}
           />
-          <View style={styles.buyList}>{/* buy list  */}</View>
+          <View style={styles.getPerk}>
+            <Text style={styles.getPerkText}>
+              escape
+              {"\n"}
+              <Text style={styles.pinkClr}>reality</Text>
+            </Text>
+            <Text style={styles.purchasePara}>
+              Unlock Action-Packed Chapters!
+            </Text>
+          </View>
+          <View style={styles.buyArea}>
+            <Text style={styles.purchaseSherds}>Purchase Shards</Text>
+            <Image
+              style={[styles.gemStoneSmall, styles.flipHorizontal]}
+              source={require("../../../assets/gemstones3.png")}
+            />
+            <BuyList />
+          </View>
+
+          <View style={styles.faqArea}>
+            <Text style={styles.faqTitle}>Frequently Asked Questions</Text>
+            <View style={styles.faqContainer}>
+              {faqData.map((faq, index) => (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => toggleFaqItem(index)}
+                >
+                  <View
+                    style={[
+                      styles.faqItem,
+                      selectedFaqIndex === index && styles.activeFaqItem,
+                      selectedFaqIndex === index && { paddingVertical: 12 },
+                    ]}
+                  >
+                    <View style={styles.faqQuestion}>
+                      <Text style={styles.faqPoint}>?</Text>
+                      <Text style={styles.faqQuestionText}>{faq.question}</Text>
+                    </View>
+                    {selectedFaqIndex === index && (
+                      <Text style={styles.faqText}>{faq.answer}</Text>
+                    )}
+                  </View>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </View>
   );
 }
@@ -51,7 +118,7 @@ const styles = StyleSheet.create({
   },
   gemStoneBack: {
     position: "absolute",
-    opacity: 0.3,
+    opacity: 0.2,
     right: 0,
     top: -15,
     width: 315.53,
@@ -92,12 +159,11 @@ const styles = StyleSheet.create({
     color: "#F8F8F8",
   },
   buyArea: {
-    marginTop: 30,
+    marginTop: 40,
     marginHorizontal: 22,
     height: 470,
     position: "relative",
-    backgroundColor: "red",
-    justifyContent: "center",
+    justifyContent: "space-between",
   },
   purchaseSherds: {
     fontSize: 18,
@@ -105,17 +171,62 @@ const styles = StyleSheet.create({
     color: "#F8F8F8",
   },
   gemStoneSmall: {
-    width: 95,
-    height: 91,
+    width: 85,
+    height: 90,
     position: "absolute",
-    right: 0,
-    top: -10,
+    right: -15,
+    top: -40,
+    opacity: 0.7,
   },
   flipHorizontal: {
     transform: [{ scaleX: -1 }],
   },
-  buyList: {
-    backgroundColor: "green",
-    height: 440,
+
+  faqArea: { marginHorizontal: 22, gap: 16, marginVertical: 30 },
+
+  faqTitle: {
+    fontSize: 18,
+    color: "#F8F8F8",
+  },
+  faqContainer: {
+    gap: 16,
+  },
+  faqItem: {
+    backgroundColor: "#191919",
+    borderRadius: 12,
+    gap: 15,
+    paddingHorizontal: 10,
+    paddingVertical: 24,
+  },
+  activeFaqItem: {
+    backgroundColor: "#2F2F2F",
+  },
+  faqPoint: {
+    width: 18,
+    height: 18,
+    backgroundColor: "#D61A4C",
+    color: "#FFFFFF",
+    borderRadius: 100,
+    textAlign: "center",
+    fontSize: 10,
+    lineHeight: 20,
+    letterSpacing: 0.2,
+  },
+  faqQuestion: {
+    flexDirection: "row",
+    gap: 8,
+    width: 260,
+    alignItems: "center",
+  },
+  faqQuestionText: {
+    fontSize: 14,
+    color: "#FFFFFF",
+    lineHeight: 22,
+  },
+  faqText: {
+    height: 58,
+    fontSize: 14,
+    lineHeight: 19.6,
+    color: "#F8F8F8",
   },
 });
