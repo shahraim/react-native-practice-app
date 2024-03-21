@@ -11,122 +11,90 @@ import { FontAwesome5 } from "@expo/vector-icons";
 
 export default function BuyList() {
   const [modalVisible, setModalVisible] = useState(false);
+  const [selectedBuy, setSelectedBuy] = useState(null);
 
-  const handleBuyPress = () => {
+  const buyData = [
+    {
+      image: require("../../../../assets/gemstones2 (2).png"),
+      offerText: "13,700",
+      offerPoint: "+2500",
+      price: "$19.99",
+      type: "topOffer",
+    },
+    {
+      image: require("../../../../assets/gemstones2 (3).png"),
+      offerText: "3000",
+      price: "$4.99",
+      discount: "10%",
+      type: "normal",
+    },
+    {
+      image: require("../../../../assets/gemstones2 (4).png"),
+      offerText: "3000",
+      price: "$4.99",
+      type: "popular",
+    },
+    {
+      image: require("../../../../assets/gemstones2 (7).png"),
+      offerText: "13,700",
+      price: "$19.99",
+      type: "normal",
+    },
+    {
+      image: require("../../../../assets/gemstones2 (5).png"),
+      offerText: "32,500",
+      price: "$49.99",
+      type: "normal",
+    },
+    {
+      image: require("../../../../assets/gemstones2 (6).png"),
+      offerText: "70,000",
+      price: "$99.99",
+      type: "normal",
+    },
+  ];
+
+  const handleBuyPress = (buy) => {
+    setSelectedBuy(buy);
     setModalVisible(true);
   };
 
   return (
     <View style={styles.buyListContainer}>
-      <View style={styles.buyList}>
-        <View style={styles.offerList}>
-          <Text style={styles.offerListText}>one time offer </Text>
-        </View>
-        <View style={styles.buyDiv}>
-          <View style={styles.buyImgOffer}>
-            <Image
-              style={styles.buyImg}
-              source={require("../../../../assets/gemstones2 (2).png")}
-            />
-            <View style={styles.buyOffer}>
-              <Text style={styles.buyOfferText}>13,700</Text>
-              <Text style={styles.buyOfferPoint}>+2500</Text>
+      {buyData.map((buy, index) => (
+        <View key={index} style={styles.buyList}>
+          {buy.type === "topOffer" && (
+            <View style={styles.offerList}>
+              <Text style={styles.offerListText}>One Time Offer</Text>
             </View>
-          </View>
-          <Text style={styles.buyPrice}>$19.99</Text>
-          <TouchableOpacity style={styles.buyBtn} onPress={handleBuyPress}>
-            <Text style={styles.buyBtnText}>Buy</Text>
+          )}
+          {buy.type === "popular" && (
+            <View style={styles.offerListPopular}>
+              <Text style={styles.offerListText}>Popular</Text>
+            </View>
+          )}
+          <TouchableOpacity>
+            <View style={styles.buyDiv}>
+              <View style={styles.buyImgOffer}>
+                <Image style={styles.buyImg} source={buy.image} />
+                <View style={styles.buyOffer}>
+                  <Text style={styles.buyOfferText}>{buy.offerText}</Text>
+                  {buy.offerPoint && (
+                    <Text style={styles.buyOfferPoint}>{buy.offerPoint}</Text>
+                  )}
+                </View>
+              </View>
+              <Text style={styles.buyPrice}>{buy.price}</Text>
+              <TouchableOpacity
+                style={styles.buyBtn}
+                onPress={() => handleBuyPress(buy)}
+              >
+                <Text style={styles.buyBtnText}>Buy</Text>
+              </TouchableOpacity>
+            </View>
           </TouchableOpacity>
         </View>
-      </View>
-      <View style={styles.buyList}>
-        <View style={styles.buyDiv}>
-          <View style={styles.buyImgOffer}>
-            <Image
-              style={styles.buyImg}
-              source={require("../../../../assets/gemstones2 (3).png")}
-            />
-            <View style={styles.buyOffer}>
-              <Text style={styles.buyOfferText}>3000</Text>
-            </View>
-          </View>
-          <Text style={styles.buyPrice}>$4.99</Text>
-          <TouchableOpacity style={styles.buyBtn}>
-            <Text style={styles.buyBtnText}>Buy</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-      <View style={styles.buyList}>
-        <View style={styles.offerListPopular}>
-          <Text style={styles.offerListText}>popular</Text>
-        </View>
-        <View style={styles.buyDiv}>
-          <View style={styles.buyImgOffer}>
-            <Image
-              style={styles.buyImg}
-              source={require("../../../../assets/gemstones2 (4).png")}
-            />
-            <View style={styles.buyOffer}>
-              <Text style={styles.buyOfferText}>3000</Text>
-            </View>
-          </View>
-          <Text style={styles.buyPrice}>$4.99</Text>
-          <TouchableOpacity style={styles.buyBtn}>
-            <Text style={styles.buyBtnText}>Buy</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-      <View style={styles.buyList}>
-        <View style={styles.buyDiv}>
-          <View style={styles.buyImgOffer}>
-            <Image
-              style={styles.buyImg}
-              source={require("../../../../assets/gemstones2 (7).png")}
-            />
-            <View style={styles.buyOffer}>
-              <Text style={styles.buyOfferText}>13,700</Text>
-            </View>
-          </View>
-          <Text style={styles.buyPrice}>$19.99</Text>
-          <TouchableOpacity style={styles.buyBtn}>
-            <Text style={styles.buyBtnText}>Buy</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-      <View style={styles.buyList}>
-        <View style={styles.buyDiv}>
-          <View style={styles.buyImgOffer}>
-            <Image
-              style={styles.buyImg}
-              source={require("../../../../assets/gemstones2 (5).png")}
-            />
-            <View style={styles.buyOffer}>
-              <Text style={styles.buyOfferText}>32,500</Text>
-            </View>
-          </View>
-          <Text style={styles.buyPrice}>$49.99</Text>
-          <TouchableOpacity style={styles.buyBtn}>
-            <Text style={styles.buyBtnText}>Buy</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-      <View style={styles.buyList}>
-        <View style={styles.buyDiv}>
-          <View style={styles.buyImgOffer}>
-            <Image
-              style={styles.buyImg}
-              source={require("../../../../assets/gemstones2 (6).png")}
-            />
-            <View style={styles.buyOffer}>
-              <Text style={styles.buyOfferText}>70,000</Text>
-            </View>
-          </View>
-          <Text style={styles.buyPrice}>$99.99</Text>
-          <TouchableOpacity style={styles.buyBtn}>
-            <Text style={styles.buyBtnText}>Buy</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+      ))}
       <Modal
         animationType="slide"
         transparent={true}
@@ -135,54 +103,58 @@ export default function BuyList() {
           setModalVisible(false);
         }}
       >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <View style={styles.modalHeader}>
-              <View style={styles.modalHeadSec}>
-                <View style={styles.infoHead}>
-                  <Image
-                    style={styles.infoHeadImg}
-                    source={require("../../../../assets/gemstones2 (3).png")}
-                  />
-                  <Text style={styles.infoText}>3,000</Text>
+        {selectedBuy && (
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <View style={styles.modalHeader}>
+                <View style={styles.modalHeadSec}>
+                  <View style={styles.infoHead}>
+                    <Image
+                      style={styles.infoHeadImg}
+                      source={selectedBuy.image}
+                    />
+                    <Text style={styles.infoText}>{selectedBuy.offerText}</Text>
+                  </View>
+                  <TouchableOpacity
+                    style={styles.closeButton}
+                    onPress={() => setModalVisible(false)}
+                  >
+                    <FontAwesome5 name="times" size={14} color="white" />
+                  </TouchableOpacity>
                 </View>
-                <TouchableOpacity
-                  style={styles.closeButton}
-                  onPress={() => setModalVisible(false)}
-                >
-                  <FontAwesome5 name="times" size={14} color="white" />
-                </TouchableOpacity>
+                <Text style={styles.modalHeadText}>
+                  You are about to buy{" "}
+                  <Text style={{ fontWeight: "bold", color: "#f8f8f8" }}>
+                    {selectedBuy.offerText} shards
+                  </Text>
+                </Text>
               </View>
-              <Text style={styles.modalHeadText}>
-                You are about to buy{" "}
-                <Text style={{ fontWeight: "bold", color: "#f8f8f8" }}>
-                  3,000 hards
-                </Text>
-              </Text>
-            </View>
 
-            <View style={styles.priceContainer}>
-              <Text style={styles.sideLeft}>Price</Text>
-              <Text style={styles.sideright}>$4.99</Text>
-            </View>
-            <View style={styles.priceContainer}>
-              <Text style={styles.sideLeft}>Discount</Text>
-              <Text style={styles.sideright}>-10%</Text>
-            </View>
-            <View style={styles.priceContainerTotal}>
-              <Text style={styles.sideLeft}>Total</Text>
-              <Text style={styles.sideright}>$4.49</Text>
-            </View>
-            <TouchableOpacity style={styles.payButton}>
-              <Text style={styles.payButtonText}>
-                Pay with{" "}
-                <Text style={{ fontSize: 24 }}>
-                  <FontAwesome5 name="apple" size={20} color="black" /> Pay
+              <View style={styles.priceContainer}>
+                <Text style={styles.sideLeft}>Price</Text>
+                <Text style={styles.sideRight}>{selectedBuy.price}</Text>
+              </View>
+              <View style={styles.priceContainer}>
+                <Text style={styles.sideLeft}>Discount</Text>
+                <Text style={styles.sideRight}>
+                  {selectedBuy.discount ? selectedBuy.discount : "-10%"}
                 </Text>
-              </Text>
-            </TouchableOpacity>
+              </View>
+              <View style={styles.priceContainerTotal}>
+                <Text style={styles.sideLeft}>Total</Text>
+                <Text style={styles.sideRight}>{selectedBuy.price}</Text>
+              </View>
+              <TouchableOpacity style={styles.payButton}>
+                <Text style={styles.payButtonText}>
+                  Pay with{" "}
+                  <Text style={{ fontSize: 24 }}>
+                    <FontAwesome5 name="apple" size={20} color="black" /> Pay
+                  </Text>
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
+        )}
       </Modal>
     </View>
   );
@@ -328,7 +300,7 @@ const styles = StyleSheet.create({
   sideLeft: {
     color: "#ADADB1",
   },
-  sideright: {
+  sideRight: {
     color: "#f8f8f8",
   },
   modalHeader: {
